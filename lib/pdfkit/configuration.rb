@@ -19,21 +19,20 @@ class PDFKit
     end
 
     def wkhtmltopdf
-      @wkhtmltopdf ||= default_wkhtmltopdf
+      File.expand_path('../bin/wkhtmltopdf')
     end
 
     def default_wkhtmltopdf
-      #@default_command_path ||= (defined?(Bundler::GemfileError) && File.exists?('Gemfile') ? `bundle exec which wkhtmltopdf` : `which wkhtmltopdf`).chomp
-    	require_relative('../bin/wkhtmltopdf')
+      File.expand_path('../bin/wkhtmltopdf')
     end
 
     def wkhtmltopdf=(path)
-      if File.exist?(path)
-        @wkhtmltopdf = path
-      else
-        warn "No executable found at #{path}. Will fall back to #{default_wkhtmltopdf}" unless File.exist?(path)
-        @wkhtmltopdf = default_wkhtmltopdf
-      end
+      # if File.exist?(default_path)
+        @wkhtmltopdf = File.expand_path(default_path)
+      # else
+      #   warn "No executable found at #{default_path}. Will fall back to #{default_wkhtmltopdf}" unless File.exist?(default_path)
+      #   @wkhtmltopdf = default_wkhtmltopdf
+      # end
     end
 
     def quiet?
@@ -43,6 +42,10 @@ class PDFKit
     def verbose?
       @verbose
     end
+  end
+
+  def default_path
+    '../bin/wkhtmltopdf'
   end
 
   class << self
