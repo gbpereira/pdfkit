@@ -19,16 +19,16 @@ class PDFKit
     end
 
     def wkhtmltopdf
-      File.expand_path('../bin/wkhtmltopdf')
+      File.expand_path(File.join(Gem.loaded_specs['pdfkit'].full_gem_path, '/bin/wkhtmltopdf'))
     end
 
-    def default_wkhtmltopdf
-      File.expand_path('../bin/wkhtmltopdf')
-    end
+    # def default_wkhtmltopdf
+    #   File.expand_path(File.join(Gem.loaded_specs['pdfkit'].full_gem_path, '/bin/wkhtmltopdf'))
+    # end
 
     def wkhtmltopdf=(path)
-      # if File.exist?(default_path)
-        @wkhtmltopdf = File.expand_path(default_path)
+      # if File.exist?(File.expand_path(File.join(Gem.loaded_specs['pdfkit'].full_gem_path, '/bin/wkhtmltopdf')))
+        @wkhtmltopdf = File.expand_path(File.expand_path(File.join(Gem.loaded_specs['pdfkit'].full_gem_path, '/bin/wkhtmltopdf')))
       # else
       #   warn "No executable found at #{default_path}. Will fall back to #{default_wkhtmltopdf}" unless File.exist?(default_path)
       #   @wkhtmltopdf = default_wkhtmltopdf
@@ -44,9 +44,9 @@ class PDFKit
     end
   end
 
-  def default_path
-    '../bin/wkhtmltopdf'
-  end
+  # def default_path
+  #   File.expand_path(File.join(Gem.loaded_specs['pdfkit'].full_gem_path, '/bin/wkhtmltopdf'))
+  # end
 
   class << self
     attr_accessor :configuration
