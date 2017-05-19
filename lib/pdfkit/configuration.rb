@@ -19,7 +19,7 @@ class PDFKit
     end
 
     def wkhtmltopdf
-      File.expand_path(File.join(Gem.loaded_specs['pdfkit'].full_gem_path, '/lib/bin/wkhtmltopdf'))
+      File.join(Gem.loaded_specs['pdfkit'].full_gem_path, '/lib/bin/wkhtmltopdf')
     end
 
     def quiet?
